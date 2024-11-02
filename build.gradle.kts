@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
+    alias(libs.plugins.composeDesktop)
+    alias(libs.plugins.compose.compiler)
 }
 
 group = providers.gradleProperty("pluginGroup").get()
@@ -21,7 +23,10 @@ kotlin {
 
 // Configure project's dependencies
 repositories {
+    google()
+    gradlePluginPortal()
     mavenCentral()
+    maven("https://packages.jetbrains.team/maven/p/kpm/public/")
 
     // IntelliJ Platform Gradle Plugin Repositories Extension - read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin-repositories-extension.html
     intellijPlatform {
@@ -47,6 +52,16 @@ dependencies {
         pluginVerifier()
         zipSigner()
         testFramework(TestFrameworkType.Platform)
+    }
+
+    // See https://github.com/JetBrains/Jewel/releases for the release notes
+    // The platform version is a supported major IJP version (e.g., 232 or 233 for 2023.2 and 2023.3 respectively)
+    implementation("org.jetbrains.jewel:jewel-ide-laf-bridge-243:0.26.2")
+
+    // Do not bring in Material (we use Jewel) and Coroutines (the IDE has its own)
+    api(compose.desktop.currentOs) {
+        exclude(group = "org.jetbrains.compose.material")
+        exclude(group = "org.jetbrains.kotlinx")
     }
 }
 
