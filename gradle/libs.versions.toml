@@ -1,6 +1,7 @@
 [versions]
 # libraries
 junit = "4.13.2"
+kotlinxSerialization = "1.7.3"
 
 # plugins
 changelog = "2.2.1"
@@ -12,6 +13,7 @@ composeDesktop = "1.7.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 
 [plugins]
 changelog = { id = "org.jetbrains.changelog", version.ref = "changelog" }
@@ -21,3 +23,4 @@ kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 qodana = { id = "org.jetbrains.qodana", version.ref = "qodana" }
 composeDesktop = { id = "org.jetbrains.compose", version.ref = "composeDesktop" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

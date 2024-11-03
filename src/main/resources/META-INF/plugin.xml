@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.github.costafot.intellijplugin</id>
-    <name>intellij-plugin</name>
+    <id>com.github.costafot.dailypepeplugin</id>
+    <name>Daily Pepe</name>
     <vendor>costafot</vendor>
 
     <depends>com.intellij.modules.platform</depends>
@@ -9,7 +9,16 @@
     <resource-bundle>messages.MyBundle</resource-bundle>
 
     <extensions defaultExtensionNs="com.intellij">
-        <toolWindow factoryClass="com.github.costafot.intellijplugin.toolWindow.MyToolWindowFactory" id="MyToolWindow"/>
+
+        <toolWindow id="PepeToolWindow" anchor="bottom" secondary="false" canCloseContents="false"
+                    icon="PepeIcons.ToolWindowIcon"
+                    factoryClass="com.github.costafot.intellijplugin.toolWindow.PepeToolWindowFactory"/>
+
+        <iconMapper mappingFile="PepeIntUiIconMappings.json"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <testStatusListener implementation="com.github.costafot.intellijplugin.listeners.MyTestStatusListener"/>
     </extensions>
 
     <applicationListeners>

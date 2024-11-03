@@ -11,6 +11,8 @@ plugins {
     alias(libs.plugins.kover) // Gradle Kover Plugin
     alias(libs.plugins.composeDesktop)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinx.serialization)
+
 }
 
 group = providers.gradleProperty("pluginGroup").get()
@@ -57,6 +59,12 @@ dependencies {
     // See https://github.com/JetBrains/Jewel/releases for the release notes
     // The platform version is a supported major IJP version (e.g., 232 or 233 for 2023.2 and 2023.3 respectively)
     implementation("org.jetbrains.jewel:jewel-ide-laf-bridge-243:0.26.2")
+    implementation("org.jetbrains.compose.components:components-animatedimage:1.5.3") { exclude(group = "org.jetbrains.kotlinx") }
+
+    implementation("io.ktor:ktor-client-core:3.0.0") { exclude(group = "org.jetbrains.kotlinx") }
+    implementation("io.ktor:ktor-client-cio:3.0.0") { exclude(group = "org.jetbrains.kotlinx") }
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 
     // Do not bring in Material (we use Jewel) and Coroutines (the IDE has its own)
     api(compose.desktop.currentOs) {
